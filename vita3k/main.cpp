@@ -29,9 +29,7 @@
 #include <util/log.h>
 #include <util/string_utils.h>
 
-#if DISCORD_RPC
 #include <app/discord.h>
-#endif
 
 #ifdef WIN32
 #include <combaseapi.h>
@@ -114,18 +112,15 @@ int main(int argc, char *argv[]) {
     GuiState gui;
     gui::init(gui, host);
 
-#if DISCORD_RPC
     auto discord_rich_presence_old = host.cfg.discord_rich_presence;
-#endif
 
     // Application not provided via argument, show game selector
     while (run_type == app::AppRunType::Unknown) {
         if (handle_events(host, gui)) {
             gui::draw_begin(gui, host);
 
-#if DISCORD_RPC
             discord::update_init_status(host.cfg.discord_rich_presence, &discord_rich_presence_old);
-#endif
+
             gui::draw_live_area(gui, host);
             gui::draw_ui(gui, host);
 

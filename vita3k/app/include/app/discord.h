@@ -1,7 +1,5 @@
 #pragma once
 
-#if DISCORD_RPC
-
 #include <string>
 
 namespace discord {
@@ -13,5 +11,3 @@ void update_init_status(bool discord_rich_presence, bool *discord_rich_presence_
 
 void update_presence(const std::string &state = "", const std::string &details = "Idle", bool reset_timer = true);
 } // namespace discord
-
-#endif

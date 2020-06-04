@@ -29,9 +29,7 @@
 #include <util/lock_and_find.h>
 #include <util/log.h>
 
-#if DISCORD_RPC
 #include <app/discord.h>
-#endif
 
 #ifdef USE_GDBSTUB
 #include <gdbstub/functions.h>
@@ -147,12 +145,10 @@ bool init(HostState &state, Config &cfg, const Root &root_paths) {
         return false;
     }
 
-#if DISCORD_RPC
     discord::init();
     if (cfg.discord_rich_presence) {
         discord::update_presence("");
     }
-#endif
 
     state.kernel.base_tick = { rtc_base_ticks() };
 
@@ -189,9 +185,7 @@ void destroy(HostState &host, ImGui_State *imgui) {
     }
 #endif
 
-#ifdef USE_DISCORD_RICH_PRESENCE
     discord::shutdown();
-#endif
 
 #ifdef USE_GDBSTUB
     server_close(host);

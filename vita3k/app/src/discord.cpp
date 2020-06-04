@@ -1,5 +1,3 @@
-#if DISCORD_RPC
-
 #include <app/discord.h>
 #include <discord_rpc.h>
 
@@ -43,4 +41,3 @@ void update_presence(const std::string &state, const std::string &details, bool 
     Discord_UpdatePresence(&discord_presence);
 }
 } // namespace discord
-#endif

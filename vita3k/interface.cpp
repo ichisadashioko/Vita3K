@@ -41,9 +41,7 @@
 #include <gdbstub/functions.h>
 #endif
 
-#if DISCORD_RPC
 #include <app/discord.h>
-#endif
 
 static size_t write_to_buffer(void *pOpaque, mz_uint64 file_ofs, const void *pBuf, size_t n) {
     vfs::FileBuffer *const buffer = static_cast<vfs::FileBuffer *>(pOpaque);
@@ -403,10 +401,9 @@ ExitCode load_app(Ptr<const void> &entry_point, HostState &host, GuiState &gui, 
     server_open(host);
 #endif
 
-#if DISCORD_RPC
-    if (host.cfg.discord_rich_presence)
+    if (host.cfg.discord_rich_presence){
         discord::update_presence(host.io.title_id, host.game_title);
-#endif
+    }
 
     return Success;
 }
